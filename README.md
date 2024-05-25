@@ -1,13 +1,15 @@
 # Yena Lee
 
 ## About
-- Electrical and Computer Engineering major at the University of Seoul
-- Frontend Developer
+🍀 Electrical and Computer Engineering major at the University of Seoul  
+🍀 Frontend Developer
 
 ## Tech Stack
 <img alt="html5" src ="https://img.shields.io/badge/html5-E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white"/> <img alt="css3" src ="https://img.shields.io/badge/css3-1572B6.svg?&style=for-the-badge&logo=css3&logoColor=white"/> <br/> 
-<img alt="c" src ="https://img.shields.io/badge/c-A8B9CC.svg?&style=for-the-badge&logo=c&logoColor=white"/> <img alt="python" src ="https://img.shields.io/badge/python-3776AB.svg?&style=for-the-badge&logo=python&logoColor=white"/> <img alt="javascript" src ="https://img.shields.io/badge/javascript-F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=white"/> <br/>
-<img alt="react" src ="https://img.shields.io/badge/react-61DAFB.svg?&style=for-the-badge&logo=react&logoColor=white"/> <img alt="threedotjs" src ="https://img.shields.io/badge/threedotjs-000000.svg?&style=for-the-badge&logo=threedotjs&logoColor=white"/>
+<img alt="c" src ="https://img.shields.io/badge/c-A8B9CC.svg?&style=for-the-badge&logo=c&logoColor=white"/> <img alt="python" src ="https://img.shields.io/badge/python-3776AB.svg?&style=for-the-badge&logo=python&logoColor=white"/> <br/>
+<img alt="javascript" src ="https://img.shields.io/badge/javascript-F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=white"/> <img alt="typescript" src ="https://img.shields.io/badge/typescript-3178C6.svg?&style=for-the-badge&logo=typescript&logoColor=white"/> <br/>
+<img alt="react" src ="https://img.shields.io/badge/react-61DAFB.svg?&style=for-the-badge&logo=react&logoColor=white"/> <img alt="next.js" src ="https://img.shields.io/badge/next.js-000000.svg?&style=for-the-badge&logo=next.js&logoColor=white"/> <br/>
+<img alt="threedotjs" src ="https://img.shields.io/badge/threedotjs-000000.svg?&style=for-the-badge&logo=threedotjs&logoColor=white"/>
 
 <!-- [Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=YenaLey&show_icons=true&theme=dark) -->
 
