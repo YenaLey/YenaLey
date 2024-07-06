@@ -10,5 +10,5 @@ Currently Growing as a Front-End Developer...🔥<br>
 
 See My Projects...👋 | <a href="https://yena.info/">my portfolio</a><br>
 
-Contact Me 📞 | <a href="https://www.instagram.com/2ye._na/">instagram</a> | <a href="mailto:yena.e121@gmail.com">mail</a>
+Contact Me 📞 | <a href="https://www.instagram.com/2ye._na/">instagram</a> | <a href="mailto:yena.e121@gmail.com">yena.e121@gmail.com</a>
 
