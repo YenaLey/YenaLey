@@ -12,9 +12,9 @@ See My Projects...👋 | <a href="https://yenaley.github.io/">my portfolio</a><b
 Contact Me 📞 | <a href="https://www.instagram.com/2ye._na/">instagram</a> | <a href="mailto:yena.e121@gmail.com">yena.e121@gmail.com</a>
 
 <!--STATS_START-->
-<!-- GitHub Stats will be dynamically inserted here -->
+![](./stats.svg)
 <!--STATS_END-->
 
 <!--LANGS_START-->
-<!-- Top Languages will be dynamically inserted here -->
+![](./langs.svg)
 <!--LANGS_END-->
