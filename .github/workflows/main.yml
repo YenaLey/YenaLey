@@ -1,29 +1,48 @@
-- name: Fetch GitHub Stats
-  env:
-    PAT_1: ${{ secrets.PAT_1 }}
-  run: |
-    # 1) GitHub Stats API를 호출해서 SVG 파일 내려받기
-    curl -H "Authorization: Bearer $PAT_1" \
-      "https://github-readme-stats.vercel.app/api?username=YenaLey&show_icons=true&hide=stars,contribs&hide_rank=true&count_private=true&include_all_commits=true" \
-      -o stats.svg
+name: Update GitHub Stats
 
-    # 2) Top Langs도 동일하게
-    curl -H "Authorization: Bearer $PAT_1" \
-      "https://github-readme-stats.vercel.app/api/top-langs?username=YenaLey&layout=compact&count_private=true" \
-      -o langs.svg
+on:
+  schedule:
+    - cron: "0 0 * * *" # 매일 자정(UTC) 자동 실행 -> 한국시간 오전 9시
+  workflow_dispatch: # 수동 실행도 가능
 
-    # 3) 이제 stats.svg, langs.svg 파일이 생겼으므로
-    # README.md에는 URL 대신 stats.svg와 langs.svg를 참조하도록 수정
-    # 원본 README에서 <!--STATS_START--> ~ <!--STATS_END--> 사이를
-    # 로컬 svg 삽입 문구로 치환하거나 etc...
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
 
-    sed -i 's|<!--STATS_START-->.*<!--STATS_END-->|<!--STATS_START-->\n![](./stats.svg)\n<!--STATS_END-->|s' README.md
-    sed -i 's|<!--LANGS_START-->.*<!--LANGS_END-->|<!--LANGS_START-->\n![](./langs.svg)\n<!--LANGS_END-->|s' README.md
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
 
-- name: Commit and Push Changes
-  run: |
-    git config user.name "GitHub Actions"
-    git config user.email "actions@github.com"
-    git add README.md stats.svg langs.svg
-    git commit -m "🔄 Update GitHub Stats (auto)" || echo "No changes to commit"
-    git push
+      - name: Fetch GitHub Stats
+        env:
+          PAT_1: ${{ secrets.PAT_1 }}
+        run: |
+          # 1) GitHub Stats API를 호출해서 SVG 파일 내려받기
+          curl -H "Authorization: Bearer $PAT_1" \
+            "https://github-readme-stats.vercel.app/api?username=YenaLey&show_icons=true&hide=stars,contribs&hide_rank=true&count_private=true&include_all_commits=true" \
+            -o stats.svg
+
+          # 2) Top Langs도 동일하게
+          curl -H "Authorization: Bearer $PAT_1" \
+            "https://github-readme-stats.vercel.app/api/top-langs?username=YenaLey&layout=compact&count_private=true" \
+            -o langs.svg
+
+          # 3) README.md 내용을 치환하여 stats.svg, langs.svg 이미지를 삽입
+          #   (<!--STATS_START--> ~ <!--STATS_END--> 구간과
+          #    <!--LANGS_START--> ~ <!--LANGS_END--> 구간을 대체)
+          sed -i '/<!--STATS_START-->/, /<!--STATS_END-->/ c\
+          <!--STATS_START-->\n![](./stats.svg)\n<!--STATS_END-->' README.md
+
+          sed -i '/<!--LANGS_START-->/, /<!--LANGS_END-->/ c\
+          <!--LANGS_START-->\n![](./langs.svg)\n<!--LANGS_END-->' README.md
+
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add README.md stats.svg langs.svg
+          # 변경이 없으면 커밋을 생략하고 넘어가기
+          git commit -m "🔄 Update GitHub Stats (auto)" || echo "No changes to commit"
+          git push
