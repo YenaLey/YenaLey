@@ -1,44 +1,29 @@
-name: Update GitHub Stats
+- name: Fetch GitHub Stats
+  env:
+    PAT_1: ${{ secrets.PAT_1 }}
+  run: |
+    # 1) GitHub Stats API를 호출해서 SVG 파일 내려받기
+    curl -H "Authorization: Bearer $PAT_1" \
+      "https://github-readme-stats.vercel.app/api?username=YenaLey&show_icons=true&hide=stars,contribs&hide_rank=true&count_private=true&include_all_commits=true" \
+      -o stats.svg
 
-on:
-  schedule:
-    - cron: "0 0 * * *" # 매일 자정 UTC (한국 시간 9AM) 실행
-  workflow_dispatch: # 수동 실행 가능
+    # 2) Top Langs도 동일하게
+    curl -H "Authorization: Bearer $PAT_1" \
+      "https://github-readme-stats.vercel.app/api/top-langs?username=YenaLey&layout=compact&count_private=true" \
+      -o langs.svg
 
-jobs:
-  update-readme:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          persist-credentials: false # 기본 인증 비활성화
+    # 3) 이제 stats.svg, langs.svg 파일이 생겼으므로
+    # README.md에는 URL 대신 stats.svg와 langs.svg를 참조하도록 수정
+    # 원본 README에서 <!--STATS_START--> ~ <!--STATS_END--> 사이를
+    # 로컬 svg 삽입 문구로 치환하거나 etc...
 
-      - name: Fetch GitHub Stats (Avoid Storing PAT in README)
-        env:
-          PAT_1: ${{ secrets.PAT_1 }}
-        run: |
-          echo "Generating Markdown dynamically..."
+    sed -i 's|<!--STATS_START-->.*<!--STATS_END-->|<!--STATS_START-->\n![](./stats.svg)\n<!--STATS_END-->|s' README.md
+    sed -i 's|<!--LANGS_START-->.*<!--LANGS_END-->|<!--LANGS_START-->\n![](./langs.svg)\n<!--LANGS_END-->|s' README.md
 
-          # GitHub Stats API 요청 (PAT 사용)
-          STATS_URL="https://github-readme-stats.vercel.app/api?username=YenaLey&show_icons=true&hide=stars,contribs&hide_rank=true&count_private=true&include_all_commits=true&token=$PAT_1"
-
-          # Top Languages API 요청 (PAT 사용)
-          LANGS_URL="https://github-readme-stats.vercel.app/api/top-langs/?username=YenaLey&layout=compact&count_private=true&token=$PAT_1"
-
-          # 기존 README.md에서 Stats와 Langs 부분만 업데이트
-          awk -v stats_url="$STATS_URL" 'NR==FNR{a[NR]=$0;next} /<!--STATS_START-->/{print $0;print "<!-- Updated dynamically -->";print "![]("stats_url")";next}1' README.md README.md > new_README.md
-
-          awk -v langs_url="$LANGS_URL" 'NR==FNR{a[NR]=$0;next} /<!--LANGS_START-->/{print $0;print "<!-- Updated dynamically -->";print "![]("langs_url")";next}1' new_README.md new_README.md > final_README.md
-
-          mv final_README.md README.md
-
-      - name: Commit and Push Changes
-        env:
-          PAT_1: ${{ secrets.PAT_1 }}
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add README.md
-          git diff --staged --quiet || git commit -m "🔄 Update GitHub Stats (auto)"
-          git push https://x-access-token:${PAT_1}@github.com/YenaLey/YenaLey.git main
+- name: Commit and Push Changes
+  run: |
+    git config user.name "GitHub Actions"
+    git config user.email "actions@github.com"
+    git add README.md stats.svg langs.svg
+    git commit -m "🔄 Update GitHub Stats (auto)" || echo "No changes to commit"
+    git push
