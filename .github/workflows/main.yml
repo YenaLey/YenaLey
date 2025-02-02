@@ -2,47 +2,53 @@ name: Update GitHub Stats
 
 on:
   schedule:
-    - cron: "0 0 * * *" # 매일 자정(UTC) 자동 실행 -> 한국시간 오전 9시
-  workflow_dispatch: # 수동 실행도 가능
+    - cron: "0 0 * * *" # 매일 자정(UTC) 자동 실행 (한국시각 오전 9시)
+  workflow_dispatch: # 필요 시 Actions 탭에서 수동 실행 가능
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      # 1) 저장소를 체크아웃 (기본 GITHUB_TOKEN 사용 X, PAT으로 직접 push할 예정이므로)
+      - name: Checkout repository
         uses: actions/checkout@v3
         with:
           persist-credentials: false
 
+      # 2) stats.svg, langs.svg 파일을 생성하고 README.md 내용을 치환
       - name: Fetch GitHub Stats
         env:
           PAT_1: ${{ secrets.PAT_1 }}
         run: |
-          # 1) GitHub Stats API를 호출해서 SVG 파일 내려받기
+          # (A) stats.svg 다운로드: Org 기여/Private 기여 포함하려면 토큰 헤더로
           curl -H "Authorization: Bearer $PAT_1" \
             "https://github-readme-stats.vercel.app/api?username=YenaLey&show_icons=true&hide=stars,contribs&hide_rank=true&count_private=true&include_all_commits=true" \
             -o stats.svg
 
-          # 2) Top Langs도 동일하게
+          # (B) langs.svg 다운로드
           curl -H "Authorization: Bearer $PAT_1" \
             "https://github-readme-stats.vercel.app/api/top-langs?username=YenaLey&layout=compact&count_private=true" \
             -o langs.svg
 
-          # 3) README.md 내용을 치환하여 stats.svg, langs.svg 이미지를 삽입
-          #   (<!--STATS_START--> ~ <!--STATS_END--> 구간과
-          #    <!--LANGS_START--> ~ <!--LANGS_END--> 구간을 대체)
+          # (C) README.md의 <!--STATS_START--> ~ <!--STATS_END--> 구간을 stats.svg 로 치환
           sed -i '/<!--STATS_START-->/, /<!--STATS_END-->/ c\
           <!--STATS_START-->\n![](./stats.svg)\n<!--STATS_END-->' README.md
 
+          # (D) README.md의 <!--LANGS_START--> ~ <!--LANGS_END--> 구간을 langs.svg 로 치환
           sed -i '/<!--LANGS_START-->/, /<!--LANGS_END-->/ c\
           <!--LANGS_START-->\n![](./langs.svg)\n<!--LANGS_END-->' README.md
 
+      # 3) 변경사항 커밋 & PAT 사용해 푸시
       - name: Commit and Push Changes
+        env:
+          PAT_1: ${{ secrets.PAT_1 }} # 본인이 Secrets에 저장한 Personal Access Token
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
+
           git add README.md stats.svg langs.svg
-          # 변경이 없으면 커밋을 생략하고 넘어가기
           git commit -m "🔄 Update GitHub Stats (auto)" || echo "No changes to commit"
-          git push
+
+          # x-access-token + PAT 으로 인증 후 main 브랜치에 푸시
+          git push "https://x-access-token:${PAT_1}@github.com/YenaLey/YenaLey.git" main
