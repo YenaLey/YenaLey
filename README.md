@@ -10,11 +10,3 @@ Currently Growing as a Front-End Developer...🔥<br>
 See My Projects...👋 | <a href="https://yenaley.github.io/">my portfolio</a><br>
 
 Contact Me 📞 | <a href="https://www.instagram.com/2ye._na/">instagram</a> | <a href="mailto:yena.e121@gmail.com">yena.e121@gmail.com</a>
-
-Exploring and building better web experiences! 🚀
-
-![Yena Lee's GitHub stats](https://github-readme-stats.vercel.app/api?username=YenaLey&show_icons=true&hide=stars,contribs&hide_rank=true&count_private=true&include_all_commits=true)
-
-A snapshot of my most-used technologies! 💡
-
-![Yena Lee's Language Stats](https://github-readme-stats.vercel.app/api/top-langs?username=YenaLey&layout=compact&count_private=true)
