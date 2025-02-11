@@ -13,7 +13,7 @@ Currently Growing as a Front-End Developer...🔥<br>
 
 ⚡ Electrical and Computer Engineering major at the University of Seoul | <a href="https://engineering.uos.ac.kr/engineering/depart/ecehp/introduct.do">main page</a><br>
 🏡 Front-End Freelancer on Kmong | <a href="https://kmong.com/gig/553584">my profile</a><br>
-🌟 Quipu Developers Club President | <a href="https://quipu.uos.ac.kr/">main page</a><br>
+🌟 Quipu Developers Club President | <a href="https://quipu.uos.ac.kr/">main page</a> | <a href="https://github.com/Quipu-Developers">GitHub</a><br>
 
 See My Projects...👋 | <a href="https://yenaley.github.io/">my portfolio</a><br>
 
