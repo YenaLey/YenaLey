@@ -7,8 +7,8 @@ Currently Growing as a Front-End Developer...🔥<br>
 <img alt="typescript" src ="https://img.shields.io/badge/typescript-3178C6.svg?&style=for-the-badge&logo=typescript&logoColor=white"/> 
 
 🚀 Exploring & Building with  
+<img alt="SCSS" src ="https://img.shields.io/badge/SCSS-CC6699.svg?&style=for-the-badge&logo=sass&logoColor=white"/>
 <img alt="tailwindcss" src ="https://img.shields.io/badge/tailwindcss-06B6D4.svg?&style=for-the-badge&logo=tailwindcss&logoColor=white"/> 
-<img alt="styledcomponents" src ="https://img.shields.io/badge/styledcomponents-DB7093.svg?&style=for-the-badge&logo=styled-components&logoColor=white"/>
 <img alt="zustand" src ="https://img.shields.io/badge/zustand-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
 
 ⚡ Electrical and Computer Engineering major at the University of Seoul | <a href="https://engineering.uos.ac.kr/engineering/depart/ecehp/introduct.do">Main Page</a><br>
