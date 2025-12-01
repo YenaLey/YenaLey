@@ -15,4 +15,4 @@ Currently Growing as a Front-End Developer...🔥<br>
 💻 Quipu Developer | <a href="https://quipu.uos.ac.kr/">Website</a> | <a href="https://github.com/Quipu-Developers">GitHub</a><br>
 🏙️ Mossland Developer | <a href="https://www.moss.land">Website</a> | <a href="https://github.com/mossland">GitHub</a><br>
 
-Contact Me 📞 | <a href="https://www.instagram.com/2ye._na/">Instagram</a> | <a href="mailto:yena@moss.land">yena.e121@moss.land</a>
+Contact Me 📞 | <a href="https://www.instagram.com/2ye._na/">Instagram</a> | <a href="mailto:yena@moss.land">yena@moss.land</a>
